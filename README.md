@@ -1,5 +1,5 @@
-# Practical Accendero
-A web application to demonstrate technical abilities.
+# Practical Accendero - Recipe Web App
+A recipe web application to demonstrate technical abilities. This app allows you to create and store recipes.
 
 ## Links to Documentation Used
 [Tutorial on ReactJS, DJango](https://www.youtube.com/watch?v=f5ygXQKF6M8)
@@ -11,3 +11,7 @@ A web application to demonstrate technical abilities.
 [Testing a DJango Application](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Testing)
 
 [Testing - DJango](https://www.django-rest-framework.org/api-guide/testing/)
+
+[Currently Logged in User](https://stackoverflow.com/questions/1477319/in-django-how-do-i-know-the-currently-logged-in-user)
+
+[Pass URL as Parameter](https://stackoverflow.com/questions/52188784/pass-a-url-as-parameter-in-django-urls)

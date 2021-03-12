@@ -5,6 +5,6 @@ from RecipeApp import views
 
 urlpatterns = [
     path('create/', views.PostRecipe.as_view()),
-    url(r'recipe/(?P<name>[^/]*)/$', views.RecipeView.as_view()),
-    path(r'', views.RecipeView.as_view())
+    path('recipe/<str:name>/', views.RecipeView.as_view()),
+    path('', views.RecipeView.as_view())
 ]

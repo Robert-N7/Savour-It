@@ -1,0 +1,11 @@
+[
+  {
+    "pk": "1",
+    "model": "Authentication.CustomUser",
+    "fields": {
+      "email": "ichiro@mariners.com",
+      "username": "ichiro1",
+      "password": "konnichiwa"
+    }
+  }
+]
