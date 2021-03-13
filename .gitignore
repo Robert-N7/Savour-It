@@ -1,9 +1,17 @@
-# Created by .ignore support plugin (hsz.mobi)
 ### Python template
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# node modules
+node_modules/
+
+# public frontend output
+djangoApi/frontend/static/frontend/public/
+
+# .vscode
+.vscode/
 
 # C extensions
 *.so

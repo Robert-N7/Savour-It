@@ -1,7 +1,7 @@
 [
   {
     "pk": "1",
-    "model": "Authentication.CustomUser",
+    "model": "authentication.CustomUser",
     "fields": {
       "email": "ichiro@mariners.com",
       "username": "ichiro1",

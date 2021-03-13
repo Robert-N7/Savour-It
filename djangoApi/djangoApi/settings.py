@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -28,7 +27,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Custom user model
-AUTH_USER_MODEL = "Authentication.CustomUser"
+AUTH_USER_MODEL = "authentication.CustomUser"
 
 # Application definition
 
@@ -42,7 +41,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'RecipeApp',
     'rest_framework',
-    'Authentication'
+    'authentication',
+    'frontend'
 ]
 
 REST_FRAMEWORK = {

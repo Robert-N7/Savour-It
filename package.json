@@ -1,0 +1,43 @@
+{
+  "name": "practicalaccendero",
+  "version": "1.0.0",
+  "description": "Recipe Web App",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -c webpack.config.js",
+    "debug": "webpack -c webpack.config.js && start chrome.exe --new-window http://localhost:8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Robert-N7/PracticalAccendero.git"
+  },
+  "keywords": [
+    "Recipes"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Robert-N7/PracticalAccendero/issues"
+  },
+  "homepage": "https://github.com/Robert-N7/PracticalAccendero#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-flow": "^7.12.13",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.2.2",
+    "babel-polyfill": "^6.26.0",
+    "source-map-loader": "^1.1.3",
+    "webpack": "^5.25.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0"
+  }
+}

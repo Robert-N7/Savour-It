@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from Authentication.models import CustomUser
+from authentication.models import CustomUser
 from djangoApi import settings
 
 

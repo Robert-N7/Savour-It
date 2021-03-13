@@ -5,8 +5,8 @@ from rest_framework.response import Response
 
 from rest_framework.views import APIView
 
-from Authentication.models import CustomUser
-from Authentication.serializers import CustomUserSerializer
+from authentication.models import CustomUser
+from authentication.serializers import CustomUserSerializer
 
 
 class CustomUserCreate(APIView):

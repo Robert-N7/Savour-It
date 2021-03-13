@@ -2,8 +2,8 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate
 
-from Authentication.models import CustomUser
-from Authentication.serializers import CustomUserSerializer
+from authentication.models import CustomUser
+from authentication.serializers import CustomUserSerializer
 from RecipeApp.models import Recipe
 from RecipeApp.views import PostRecipe
 
@@ -18,7 +18,7 @@ class TestViewPostRecipe(APITestCase):
             'PhotoFileName': 'toast.png'}
 
     def add_recipe(self, data=None):
-        url='/recipes/create/'
+        url='/api/recipes/create/'
         user = CustomUser.objects.all()[0]
         if data is None:
             data = self.data

@@ -1,0 +1,30 @@
+
+#root{
+    background-color:whitesmoke;
+}
+
+.nav-link {
+    color:black;
+    font-style: italic;
+    font-weight: bold;
+    font-size: large;
+    padding: 1em;
+}
+
+
+div.new-line {
+    white-space: pre-wrap;
+}
+
+.recipe {
+    border-radius: 3em;
+    background-origin: padding-box;
+    background-color:lemonchiffon;
+    padding: 5em;
+}
+
+
+.small-italic {
+    font-style: italic;
+    font-size: small;
+}
