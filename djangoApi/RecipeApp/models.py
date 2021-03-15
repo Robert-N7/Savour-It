@@ -11,7 +11,7 @@ class Recipe(models.Model):
     Description = models.CharField(max_length=10000, null=True)
     Ingredients = models.CharField(max_length=10000)
     Steps = models.CharField(max_length=10000)
-    PhotoFileName = models.CharField(max_length=100, null=True)
+    PhotoFile = models.ImageField(upload_to='recipes', null=True)
     CreationDate = models.DateField(auto_now=True)
     Creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

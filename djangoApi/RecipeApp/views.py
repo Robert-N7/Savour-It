@@ -1,3 +1,4 @@
+import rest_framework_simplejwt
 from django.db import IntegrityError
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -18,7 +19,8 @@ from RecipeApp.serializers import RecipeSerializer
 
 class PostRecipe(APIView):
     """API view for creating and updating recipes"""
-    #permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (rest_framework_simplejwt.authentication.JWTAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def parse_json(self, request):
         """Parses the json request, adding creator as needed
@@ -29,15 +31,20 @@ class PostRecipe(APIView):
             raise ValueError('Parsed Json is not a dictionary')
         if not recipe_data.get('Name'):
             raise ValueError('Missing recipe name')
-        creator = recipe_data.get('Creator')
-        if creator is None:
-            recipe_data['Creator'] = request.user.id
+        recipe_data['Creator'] = request.user.id
         return recipe_data
 
-    def post(self, request, format='json'):
+    def upload_image(self, request, filename):
+        """ Handles uploaded recipe image file
+        """
+        pass
+        # request.files[filename]
+
+    def post(self, request):
         """Creates recipe, post api request"""
         try:
             recipe_data = self.parse_json(request)
+            self.upload_image(request, recipe_data['PhotoFileName'])
         except ValueError as e:
             return Response(str(e), status.HTTP_400_BAD_REQUEST)
         # Check for duplicate

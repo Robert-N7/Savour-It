@@ -1,14 +1,30 @@
 
-#root{
-    background-color:whitesmoke;
+body {
+    background-image: url("{% static backdrop.jpg}");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.top {
+    text-align: center;
+    margin-bottom: 3em;
+}
+
+
+.title {
+    display: inline;
+    font-size: xx-large;
+    font-weight: bold;
+    font-style: normal;
 }
 
 .nav-link {
-    color:black;
+    color:coral;
     font-style: italic;
-    font-weight: bold;
     font-size: large;
-    padding: 1em;
+    text-decoration: none;
+    padding: 2em;
 }
 
 
@@ -16,15 +32,40 @@ div.new-line {
     white-space: pre-wrap;
 }
 
-.recipe {
-    border-radius: 3em;
-    background-origin: padding-box;
-    background-color:lemonchiffon;
-    padding: 5em;
+.centered {
+    text-align: center;
+    align-content: center;
 }
-
 
 .small-italic {
     font-style: italic;
     font-size: small;
+}
+
+.form {
+    margin: 5em auto;
+    border-radius: 3em;
+    background-color: bisque;
+    padding: 3em;
+    width: fit-content;
+    background-size: 3em;
+    border-style: outset;
+    border-width: thick;
+    border-color: bisque;
+}
+
+.form-item {
+    margin: 1em;
+}
+
+.recipes-view {
+    text-align: center;
+}
+
+.recipe {
+    border-radius: 3em;
+    width: fit-content;
+    background-origin: padding-box;
+    background-color:lemonchiffon;
+    padding: 5em;
 }

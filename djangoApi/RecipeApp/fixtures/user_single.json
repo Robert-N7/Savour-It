@@ -5,7 +5,7 @@
     "fields": {
       "email": "ichiro@mariners.com",
       "username": "ichiro1",
-      "password": "konnichiwa"
+      "password": "pbkdf2_sha256$216000$MP2yeLBHcOyt$253mT64NSFJ/nZYjsF7fb2txn9nQ2CbdbLcmxZvaAXY="
     }
   }
 ]

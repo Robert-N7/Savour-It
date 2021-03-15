@@ -15,7 +15,8 @@ class Recipe extends Component {
           };
     }
 
-    componentDidMount() {
+    loadData() {
+        // Call the api and load recipe data
         const thePath = window.location.pathname;
         let urlPieces = thePath.split('/');
         let lastItem = urlPieces.pop();
@@ -41,6 +42,10 @@ class Recipe extends Component {
               });
     }
 
+    componentDidMount() {
+        this.loadData()
+    }
+
     newLineText(props) {
         return <div className="new-line">{props.text}</div>
     }
@@ -48,7 +53,7 @@ class Recipe extends Component {
     render() {
         const recipe = this.state.data
         return (
-            <div className="recipe">
+            <div className="recipe" defaultValue={this.state.placeholder}>
                 <div className="recipe_name">
                     <h1>{recipe.Name}</h1>
                 </div>
@@ -56,8 +61,7 @@ class Recipe extends Component {
                     <this.newLineText text={recipe.Description} />
                 </div>
                 <div>
-                    <div className="small-italic">{recipe.CreatorName}</div>
-                    <div className="small-italic">{recipe.CreationDate}</div>
+                    <div className="small-italic">Added {recipe.CreationDate} by {recipe.CreatorName}</div>
                 </div>
                 <div className="ingredients">
                     <h2 className="recipe-header">Ingredients</h2>

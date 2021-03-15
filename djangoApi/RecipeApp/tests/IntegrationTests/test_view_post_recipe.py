@@ -1,5 +1,6 @@
 from django.test import TestCase
 from rest_framework import status
+from rest_framework.parsers import JSONParser
 from rest_framework.test import APIRequestFactory, APITestCase, force_authenticate
 
 from authentication.models import CustomUser
@@ -17,6 +18,14 @@ class TestViewPostRecipe(APITestCase):
             'Creator': 1,
             'PhotoFileName': 'toast.png'}
 
+    def setUp(self):
+        """Setup by authenticating the user first"""
+        super().setUp()
+        response = self.client.post('/api/token/obtain/', {'username': 'ichiro1', 'password': 'konnichiwa'})
+        if response.status_code != status.HTTP_200_OK:
+            raise Exception(f'Failed to authenticate: {response.data}')
+        self.client.credentials(HTTP_AUTHORIZATION="JWT " + response.data['access'])
+
     def add_recipe(self, data=None):
         url='/api/recipes/create/'
         user = CustomUser.objects.all()[0]
@@ -24,11 +33,6 @@ class TestViewPostRecipe(APITestCase):
             data = self.data
         data['Creator'] = user.id
         return self.client.post(url, data, 'json')
-        # factory = APIRequestFactory()
-        # request = factory.get(url, data=data, format='json')
-        # force_authenticate(request, user=user)
-        # view = PostRecipe.as_view()
-        # return view(request)
 
     def test_add_recipe(self):
         """Add recipe, happy path"""

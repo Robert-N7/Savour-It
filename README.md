@@ -1,6 +1,26 @@
 # Practical Accendero - Recipe Web App
 A recipe web application to demonstrate technical abilities. This app allows you to create and store recipes.
 
+## Setup
+The backend server uses SQLite and DJango's framework written in Python. To run the server:
+```
+./djangoApi/manage.py runserver
+```
+The front end uses React written in javascript. You may use npm to build and run the app.
+```
+npm install && npm run-script debug
+```
+
+## Running Tests
+Tests on the Python backend can be run with:
+```
+./djangoApi/manage.py test
+```
+Tests on the frontend react components were done with jest.
+```
+npm run-script test
+```
+
 ## Links to Documentation Used
 [Tutorial on ReactJS, DJango](https://www.youtube.com/watch?v=f5ygXQKF6M8)
 
@@ -25,3 +45,13 @@ A recipe web application to demonstrate technical abilities. This app allows you
 [Adding Additional Field to ModelSerializer](https://stackoverflow.com/questions/18396547/django-rest-framework-adding-additional-field-to-modelserializer)
 
 [New line in React String](https://forum.freecodecamp.org/t/newline-in-react-string-solved/68484)
+
+[HTML \<input\> accept Attribute](https://www.w3schools.com/tags/att_input_accept.asp)
+
+[CSS Grid Item](https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_item)
+
+[Managing Files | DJango Documentation](https://docs.djangoproject.com/en/dev/topics/files/)
+
+[Infinite loop in interceptor](https://stackoverflow.com/questions/30607750/infinite-loop-in-interceptor)
+
+[How to add authentication header in apiclient](https://stackoverflow.com/questions/50678609/how-to-add-authentication-token-in-header-of-apiclient-in-django-rest-framewo)

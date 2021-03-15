@@ -30,32 +30,33 @@ class Signup extends Component{
                 email: this.state.email,
                 password: this.state.password
             }).then((response) => {
-                return response
+                return response;
             })
         } catch (error) {
-             throw error
+             throw error;
         }    
     }
 
     render() {
         return (
-            <div>
-                Signup
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                        <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Email:
-                        <input name="email" type="email" value={this.state.email} onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                        Password:
-                        <input name="password" type="password" value={this.state.password} onChange={this.handleChange}/>
-                    </label>
-                    <input type="submit" value="Submit"/>
-                </form>
+            <div className="centered">
+                <div className="form">
+                    <h2>Signup</h2>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="form-item">
+                            <input name="username" type="text" value={this.state.username} onChange={this.handleChange} placeholder="Display Name"/>
+                        </div>
+                        <div className="form-item">
+                            <input name="email" type="email" value={this.state.email} onChange={this.handleChange} placeholder="Email"/>
+                        </div>
+                        <div className="form-item">
+                            <input name="password" type="password" value={this.state.password} onChange={this.handleChange} placeholder="Password"/>
+                        </div>
+                        <div className="form-item">
+                            <input className="submit_button" type="submit" value="Submit"/>
+                        </div>
+                    </form>
+                </div>
             </div>
         )
     }

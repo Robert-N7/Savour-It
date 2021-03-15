@@ -20,7 +20,7 @@ class RecipeSerializer(serializers.ModelSerializer):
                   'Description',
                   'Ingredients',
                   'Steps',
-                  'PhotoFileName',
+                  'PhotoFile',
                   'CreationDate',
                   'Creator',
                   'CreatorName')
