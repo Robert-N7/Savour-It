@@ -1,26 +1,69 @@
+import os
+
+import PIL
 import rest_framework_simplejwt
-from django.db import IntegrityError
+from django import http
 from django.http import JsonResponse
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import DetailView
 from rest_framework import permissions, status
-from rest_framework.generics import ListAPIView
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import FormParser, MultiPartParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from authentication.models import CustomUser
-from authentication.serializers import CustomUserSerializer
-from RecipeApp.models import Recipe
-from RecipeApp.serializers import RecipeSerializer
+from RecipeApp.models import Recipe, RecipeImage
+from RecipeApp.serializers import RecipeSerializer, RecipeImageSerializer
 
 
 # Create your views here.
+from djangoApi.settings import MEDIA_ROOT
 
-class PostRecipe(APIView):
-    """API view for creating and updating recipes"""
+
+class ImageView(APIView):
+    """Api for getting images from the Media Root, only jpg and png are allowed"""
+    def get(self, request, *args, **kwargs):
+        name = self.kwargs.get('name')
+        if name is not None:
+            path = os.path.join(MEDIA_ROOT, name)
+            if not os.path.exists(path):
+                return Response(request.data, status.HTTP_404_NOT_FOUND)
+            ext = os.path.splitext(name)[1]
+            # Only allow jpg and png
+            if ext != '.jpg' and ext != '.png':
+                return Response(request.data, status.HTTP_400_BAD_REQUEST)
+            content_type = 'image/png' if ext == '.png' else 'image/jpeg'
+            with open(path, 'rb') as img:
+                return http.HttpResponse(img.read(), content_type=content_type)
+        return Response(request.data, status.HTTP_400_BAD_REQUEST)
+
+
+class UploadImage(APIView):
+    """
+    Api for uploading images
+    url: /api/recipes/upload/
+    """
     authentication_classes = (rest_framework_simplejwt.authentication.JWTAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, format='multipart/form-data'):
+        """ Post request to upload
+            :returns response id corresponding to the file
+        """
+        serializer = RecipeImageSerializer(data=request.data)
+        if serializer.is_valid():
+            model = serializer.save()
+            return Response(model.id, status.HTTP_201_CREATED)
+        return Response(serializer.data, status.HTTP_400_BAD_REQUEST)
+
+
+class PostRecipe(APIView):
+    """
+    API view for creating and updating recipes
+    url: /api/recipes/create/
+    """
+    # This api unlike others requires you to be logged in with JWT authentication
+    authentication_classes = (rest_framework_simplejwt.authentication.JWTAuthentication,)
+    permission_classes = (permissions.IsAuthenticated,)
+    # parser_classes = (MultiPartParser, FormParser)
 
     def parse_json(self, request):
         """Parses the json request, adding creator as needed
@@ -34,17 +77,10 @@ class PostRecipe(APIView):
         recipe_data['Creator'] = request.user.id
         return recipe_data
 
-    def upload_image(self, request, filename):
-        """ Handles uploaded recipe image file
-        """
-        pass
-        # request.files[filename]
-
-    def post(self, request):
+    def post(self, request, format='json'):
         """Creates recipe, post api request"""
         try:
             recipe_data = self.parse_json(request)
-            self.upload_image(request, recipe_data['PhotoFileName'])
         except ValueError as e:
             return Response(str(e), status.HTTP_400_BAD_REQUEST)
         # Check for duplicate
@@ -53,10 +89,10 @@ class PostRecipe(APIView):
         recipe_serializer = RecipeSerializer(data=recipe_data)
         if recipe_serializer.is_valid():
             recipe_serializer.save()
-            return Response('Added Successfully!', status=status.HTTP_200_OK)
-        return Response(recipe_data, status=status.HTTP_400_BAD_REQUEST)
+            return Response('Added Successfully!', status=status.HTTP_201_CREATED)
+        return Response(recipe_serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, format='json'):
+    def put(self, request):
         """Updates a recipe, put request"""
         try:
             recipe_data = self.parse_json(request)
@@ -80,7 +116,10 @@ class RecipeView(APIView):
     serializer_class = RecipeSerializer
 
     def get(self, request, *args, **kwargs):
-        """Recipe API for getting the backend recipes"""
+        """
+        Recipe API for getting the backend recipes
+        :param **kwargs can have a name parameter to specify a recipe to get
+        """
         name = self.kwargs.get('name')
         if name is None:
             recipes = Recipe.objects.all()

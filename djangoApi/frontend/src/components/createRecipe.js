@@ -12,35 +12,71 @@ class CreateRecipe extends Component {
             description: "",
             ingredients: "",
             steps: "",
-            photoFileName: ""
+            photoFile: null
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImageChange = this.handleImageChange.bind(this);
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
     }
 
+    /**
+     * Posts the json data to create recipe
+     * @param {json request data} data 
+     */
+    async postJson(data) {
+        try {
+            const response = await Api.post('/recipes/create/', data = data);
+            return response;
+        } catch (error) {
+            console.log(error);
+            // todo
+            return error;
+        }        
+    }
+
+    /**
+     * Handles submitting the form by sending data to server
+     * @param {*} event 
+     */
     handleSubmit(event) {
         event.preventDefault();
-        try {
-            Api.post('/create/', {
-                Name: this.state.name,
-                Description: this.state.description,
-                Ingredients: this.state.ingredients,
-                Steps: this.state.steps,
-                PhotoFileName: this.state.photoFileName,
-            }).then((response) => {
-                return response;
-            })
+        let data = {
+            'Name': this.state.name,
+            'Description': this.state.description,
+            'Ingredients': this.state.ingredients,
+            'Steps': this.state.steps
+        
         }
-        catch(error) {
-            throw error;
+        // upload file and data
+        if(this.state.photoFile) {
+            const formData = new FormData();
+            formData.append('PhotoFile', this.state.photoFile, this.state.photoFile.name);
+            Api.post('/recipes/upload/', formData, {
+                headers: {
+                    'content-type': 'multipart/form-data'
+                }
+            }).then((response) => {
+                data['PhotoFile'] = response.data[0];
+                console.log(data['PhotoFile']);
+                return this.postJson(data);
+            }).catch((error) => {
+                // todo, file upload failed message
+            })    
+        }
+        // upload data no file 
+        else {
+            this.postJson(data);
         }
     }
 
+    handleImageChange(event) {
+        this.setState({photoFile: event.target.files[0]});
+    }
 
     render() {
         return (
@@ -63,7 +99,7 @@ class CreateRecipe extends Component {
                         <div className="form-item">
                             <label>
                                 Photo:
-                                <input type="file" name="img" accept="image/*"/>
+                                <input type="file" name="img" accept="image/png,image/jpg" onChange={this.handleImageChange}/>
                             </label>
                         </div>
                         <div className="form-item">

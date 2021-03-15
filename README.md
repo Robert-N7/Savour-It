@@ -55,3 +55,9 @@ npm run-script test
 [Infinite loop in interceptor](https://stackoverflow.com/questions/30607750/infinite-loop-in-interceptor)
 
 [How to add authentication header in apiclient](https://stackoverflow.com/questions/50678609/how-to-add-authentication-token-in-header-of-apiclient-in-django-rest-framewo)
+
+[Uploading images to rest api backend in React JS](https://medium.com/@emeruchecole9/uploading-images-to-rest-api-backend-in-react-js-b931376b5833)
+
+[How to use CSRF token in Django RESTful API](https://stackoverflow.com/questions/50732815/how-to-use-csrf-token-in-django-restful-api-and-react)
+
+[React render new row every 4th column](https://stackoverflow.com/questions/42391499/react-render-new-row-every-4th-column)

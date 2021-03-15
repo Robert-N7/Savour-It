@@ -1,6 +1,6 @@
 
 body {
-    background-image: url("{% static backdrop.jpg}");
+    background-image: url("backdrop.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -26,7 +26,6 @@ body {
     text-decoration: none;
     padding: 2em;
 }
-
 
 div.new-line {
     white-space: pre-wrap;
@@ -58,6 +57,15 @@ div.new-line {
     margin: 1em;
 }
 
+.recipe-item {
+    border-radius: 3em;
+    border-style: groove;
+    background-color: lightyellow;
+    width: fit-content;
+    background-origin: padding-box;
+    padding: 3em;
+}
+
 .recipes-view {
     text-align: center;
 }
@@ -68,4 +76,13 @@ div.new-line {
     background-origin: padding-box;
     background-color:lemonchiffon;
     padding: 5em;
+}
+
+.inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img.pad {
+    padding: 3em;
 }

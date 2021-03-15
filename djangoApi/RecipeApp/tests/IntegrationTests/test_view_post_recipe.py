@@ -16,7 +16,7 @@ class TestViewPostRecipe(APITestCase):
             'Ingredients': 'Slice of Bread\nButter',
             'Steps': '1.Toast the bread\n2.Butter',
             'Creator': 1,
-            'PhotoFileName': 'toast.png'}
+            }
 
     def setUp(self):
         """Setup by authenticating the user first"""
@@ -31,13 +31,12 @@ class TestViewPostRecipe(APITestCase):
         user = CustomUser.objects.all()[0]
         if data is None:
             data = self.data
-        data['Creator'] = user.id
-        return self.client.post(url, data, 'json')
+        return self.client.post(url, data, format='json')
 
     def test_add_recipe(self):
         """Add recipe, happy path"""
         response = self.add_recipe()
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         # Ensure it is in database
         try:
             Recipe.objects.get(Name=self.data['Name'])

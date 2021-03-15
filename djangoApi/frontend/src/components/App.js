@@ -1,3 +1,5 @@
+import "core-js/stable";
+import "regenerator-runtime/runtime";
 import React, { Component} from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Login from "./login";
@@ -5,6 +7,7 @@ import Signup from "./signup";
 import Recipe from "./recipe";
 import Recipes from "./recipes";
 import CreateRecipe from "./createRecipe";
+
 
 
 /********************************************************************

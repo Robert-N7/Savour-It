@@ -40,14 +40,20 @@ class RecipesView extends Component {
     }
 
     render() {
+        // array of N elements, where N is the number of rows needed
+        const rows = [...Array( Math.ceil(this.state.data.length / 4) )];
+        // chunk the recipes into the array of rows
+        const recipeRows = rows.map( (row, idx) => this.state.data.slice(idx * 4, idx * 4 + 4) );
+        // map the rows as div.row
         return (
             <div className="recipes-view" defaultValue={this.placeholder}>
-                {this.state.data.map((recipe, index) => {
-                    index = index % 4;
+                {recipeRows.map((row, index) => {
                     return (
-                            <div className="recipe-item item{index}" key={recipe.RecipeId}>
+                        <div className="recipe-row" key={index}>
+                        {row.map(recipe=>
+                            <div className="recipe-item" key={recipe.RecipeId}>
                                 <Link className="recipe-link" to={"/recipes/" + recipe.Name}>
-                                    <img src={recipe.PhotoFile} alt={recipe.Name}/>
+                                    {recipe.ImageURL && <img src={recipe.ImageURL} alt={recipe.Name}/>}
                                     <div className="recipe-item-name">
                                         {recipe.Name}
                                     </div>
@@ -56,9 +62,10 @@ class RecipesView extends Component {
                                     {recipe.Description}
                                 </div>
                                 <div className="small-italic">
-                                    {recipe.CreatorName}
+                                   Added by {recipe.CreatorName}
                                 </div>
-                            </div>
+                            </div>)}
+                        </div>
                     )
                 })}
             </div>

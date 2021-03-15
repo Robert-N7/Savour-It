@@ -18,9 +18,12 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
+from RecipeApp import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('authentication.urls')),
     path('api/recipes/', include('RecipeApp.urls')),
+    path('media/<str:name>/', views.ImageView.as_view()),
     path('', include('frontend.urls'))
 ]

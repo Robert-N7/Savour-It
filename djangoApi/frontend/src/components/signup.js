@@ -24,17 +24,15 @@ class Signup extends Component{
 
     handleSubmit(event) {
         event.preventDefault();
-        try {
-            Api.post('/user/create/', {
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password
-            }).then((response) => {
-                return response;
-            })
-        } catch (error) {
-             throw error;
-        }    
+        Api.post('/user/create/', {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password
+        }).then((response) => {
+            return response;
+        }).catch((e) => {
+            console.log(e);
+        })
     }
 
     render() {

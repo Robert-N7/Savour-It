@@ -26,18 +26,16 @@ class Login extends Component {
      */
     handleSubmit(event) {
         event.preventDefault();
-        try {
-            const response = Api.post('/token/obtain/', {
-                username: this.state.username,
-                password: this.state.password
-            }).then((response) => {
-                Api.defaults.headers['Authorization'] = "JWT " + response.data.access;
-                localStorage.setItem('access_token', response.data.access);
-                localStorage.setItem('refresh_token', response.data.refresh);
-            })
-        } catch (error) {
-            throw error;
-        }    
+        const response = Api.post('/token/obtain/', {
+            username: this.state.username,
+            password: this.state.password
+        }).then((response) => {
+            Api.defaults.headers['Authorization'] = "JWT " + response.data.access;
+            localStorage.setItem('access_token', response.data.access);
+            localStorage.setItem('refresh_token', response.data.refresh);
+        }).catch((error) => {
+            console.log(error);
+        })
     }
 
     render() {
