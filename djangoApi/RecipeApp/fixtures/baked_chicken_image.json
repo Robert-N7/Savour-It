@@ -1,0 +1,9 @@
+[
+{
+    "model": "RecipeApp.recipeimage",
+    "pk": 3,
+    "fields": {
+        "PhotoFile": "download_1orK6GT.jpg"
+    }
+}
+]

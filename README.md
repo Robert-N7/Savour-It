@@ -61,3 +61,9 @@ npm run-script test
 [How to use CSRF token in Django RESTful API](https://stackoverflow.com/questions/50732815/how-to-use-csrf-token-in-django-restful-api-and-react)
 
 [React render new row every 4th column](https://stackoverflow.com/questions/42391499/react-render-new-row-every-4th-column)
+
+[Declarative Routing for React](https://reactrouter.com/web/example/auth-workflow)
+
+[Testing React Apps - Jest](https://jestjs.io/docs/25.x/tutorial-react)
+
+[Asynchronous Jest](https://jestjs.io/docs/asynchronous)

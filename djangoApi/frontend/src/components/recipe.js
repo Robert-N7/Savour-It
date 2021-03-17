@@ -1,6 +1,7 @@
 
 import React, { Component } from "react";
 import Api from "../axiosApi";
+import {getRecipeApi} from "../recipeApi";
 
 /**
  * Recipe class for Displaying recipes
@@ -15,31 +16,28 @@ class Recipe extends Component {
           };
     }
 
-    loadData() {
-        // Call the api and load recipe data
+    getLastOfUrl() {
         const thePath = window.location.pathname;
         let urlPieces = thePath.split('/');
         let lastItem = urlPieces.pop();
         if(!lastItem)
             lastItem = urlPieces.pop()
-        Api.get('/recipes/recipe/' + lastItem)
-            .then(response => {
-                if (response.status > 400) {
-                    console.log('Failed to find recipe ' + lastItem)
-                    return this.setState(() => {
-                        return { placeholder: "Something went wrong!" };
-                    });
-                }
-                return response.data;
-              })
-              .then(data => {
-                this.setState(() => {
-                    return {
-                        data,
-                        loaded: true
-                    };
+        return lastItem;
+    }
+
+    loadData() {
+        // Call the api and load recipe data
+        getRecipeApi(this.getLastOfUrl()).then(data => {
+            this.setState({
+                    data,
+                    loaded: true
                 });
-              });
+            return data;
+        })
+        .catch(error => {
+            console.log('Page not found, redirecting to recipes');
+            this.props.history.push('/recipes');
+        })
     }
 
     componentDidMount() {
@@ -52,6 +50,7 @@ class Recipe extends Component {
 
     render() {
         const recipe = this.state.data
+        if(recipe)
         return (
             <div className="recipe" defaultValue={this.state.placeholder}>
                 <div className="inline">
@@ -74,9 +73,11 @@ class Recipe extends Component {
                     </div>
                 </div>
                 {recipe.ImageURL && 
-                    <div className="inline"><img className="pad" src={recipe.ImageURL} alt={recipe.Name}/></div>}
+                    <div className="inline"><img className="recipe-large" src={recipe.ImageURL} alt={recipe.Name}/></div>}
             </div>
         )
+        else 
+            return <div>Loading...</div>
     }
 }
 export default Recipe

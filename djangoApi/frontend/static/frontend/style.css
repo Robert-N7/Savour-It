@@ -62,8 +62,11 @@ div.new-line {
     border-style: groove;
     background-color: lightyellow;
     width: fit-content;
+    max-width: 300px;
+    display: inline-block;
     background-origin: padding-box;
-    padding: 3em;
+    padding: 2em;
+    margin: 1em;
 }
 
 .recipes-view {
@@ -81,8 +84,36 @@ div.new-line {
 .inline {
     display: inline-block;
     vertical-align: middle;
+    max-width: 600px;
 }
 
-img.pad {
-    padding: 3em;
+img.recipe-large {
+    padding: 2em;
+    width:100%;
+    max-width:600px;
+    height: 100%;
+    max-height: 600px;
 }
+
+img.recipe-small {
+    width:100%;
+    max-width:250px;
+    height: 100%;
+    max-height: 250px;
+}
+
+.err {
+    color:red;
+    font-weight: bold;
+}
+
+button {
+    background-color: transparent;
+    border-color: teal;
+}
+
+textarea.large-ta {
+    min-width: 500px;
+    min-height: 200px;
+}
+

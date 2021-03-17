@@ -3,7 +3,7 @@ from rest_framework.test import APITestCase
 
 
 class TestViewGetRecipe(APITestCase):
-    fixtures = ['user_single.json', 'baked_chicken.json']
+    fixtures = ['user_single.json', 'baked_chicken.json', 'baked_chicken_image.json']
 
     def test_get_all(self):
         """Test getting all the recipes"""

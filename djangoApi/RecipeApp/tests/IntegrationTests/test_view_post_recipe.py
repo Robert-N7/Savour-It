@@ -10,7 +10,7 @@ from RecipeApp.views import PostRecipe
 
 
 class TestViewPostRecipe(APITestCase):
-    fixtures = ['user_single.json', 'baked_chicken.json']
+    fixtures = ['user_single.json', 'baked_chicken.json', 'baked_chicken_image.json']
     data = {'Name': 'Toast',
             'Description': 'Toasted Bread',
             'Ingredients': 'Slice of Bread\nButter',

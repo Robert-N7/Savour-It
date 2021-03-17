@@ -11,34 +11,50 @@ class Signup extends Component{
         this.state = {
             username: "",
             password: "",
-            email:""
+            email:"",
+            errMessage:null
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.createUser = this.createUser.bind(this);
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        Api.post('/user/create/', {
+    createUser() {
+        if(this.state.password.length < 8)
+            this.setState({errMessage: "Password must be at least 8 characters long"});
+
+        return Api.createUser({
             username: this.state.username,
             email: this.state.email,
             password: this.state.password
         }).then((response) => {
+            this.props.history.push('/');
             return response;
         }).catch((e) => {
-            console.log(e);
+            if(e.response.status === 409)
+                this.setState({errMessage: 'Duplicate username: ' + this.state.username});
+            else
+                this.setState({errMessage: "Failed to sign up! "});
+            return e;
         })
+
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        this.createUser();
     }
 
     render() {
         return (
             <div className="centered">
                 <div className="form">
+                    {this.state.errMessage && <div className='err'>{this.state.errMessage}</div>}
                     <h2>Signup</h2>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-item">
