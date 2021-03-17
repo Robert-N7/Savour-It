@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+include djangoApi/db.sqlite3
+recursive-include djangoApi/frontend/src *
+recursive-include djangoApi/frontend/templates *
+recursive-include djangoApi/frontend/static *
+recursive-include djangoApi/media *

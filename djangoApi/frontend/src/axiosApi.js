@@ -4,7 +4,7 @@ import axios from 'axios';
  * This module makes api calls using axios, and authenticates using JWT
  */
 
-const DEBUG = true;
+const DEBUG = false;
 
 async function createUser(credentials) {
     try {
@@ -119,7 +119,7 @@ function errIntercept(error) {
  * @param {*} debug
  * returns instance
  */
-function initAxiosInstance(debug=true) {
+function initAxiosInstance(debug=false) {
     let auth = null;
     const token = localStorage.getItem('access_token');
     if(token)

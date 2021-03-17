@@ -1,11 +1,12 @@
 {
-  "name": "practicalaccendero",
-  "version": "1.0.0",
+  "name": "savour-it",
+  "version": "0.1.0",
   "description": "Recipe Web App",
   "main": "index.js",
   "scripts": {
     "build": "webpack -c webpack.config.js",
-    "debug": "webpack -c webpack.config.js && start http://localhost:8000",
+    "debug": "webpack -c webpack.config.js && python3 -m webbrowser -t http://localhost:8000",
+    "prod": "webpack -c webpack.config.js --mode production && python3 -m webbrowser -t http://localhost:8000",
     "test": "jest"
   },
   "repository": {
@@ -13,7 +14,9 @@
     "url": "git+https://github.com/Robert-N7/PracticalAccendero.git"
   },
   "jest": {
-    "modulePathIgnorePatterns": ["./djangoApi/frontend/src/components/__test__/lib/"]
+    "modulePathIgnorePatterns": [
+      "./djangoApi/frontend/src/components/__test__/lib/"
+    ]
   },
   "keywords": [
     "Recipes"
@@ -43,11 +46,13 @@
     "webpack": "^5.25.0",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3",
     "yarn": "^1.22.10"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.9.1",
+    "open": "^8.0.2",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
