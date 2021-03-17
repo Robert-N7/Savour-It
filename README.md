@@ -2,23 +2,30 @@
 A recipe web application to demonstrate technical abilities. This app allows you to create and store recipes.
 
 ## Setup
-The backend server uses SQLite and DJango-Rest framework written in Python. First ensure python3 is installed, then run:
+First, clone the repo:
 ```
-python3 -m pip install git+https://github.com/Robert-N7/PracticalAccendero.git
+git clone https://github.com/Robert-N7/PracticalAccendero.git
+```
+
+The backend server uses SQLite and DJango-Rest framework written in Python. First ensure python3 and pip are installed, then run:
+```
+pip install django django-cors-headers djangorestframework djangorestframework-simplejwt djangorestframework pillow PyJWT==1.7.1
 ``` 
-To run the server:
+To start the server:
 ```
 python3 ./djangoApi/manage.py runserver
 ```
-And then open the following url:
+The front end uses React written in javascript. To build and launch the site in production mode run: 
 ```
-localhost:8000/
+npm install
+npm run prod
 ```
 
 ## Building
-The front end uses React written in javascript. You may use npm to build and run the app.
+You may use npm to build and run the app.
 ```
-npm install && npm run debug
+npm install
+npm run debug
 ```
 
 ## Running Tests

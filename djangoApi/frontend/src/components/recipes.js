@@ -43,10 +43,20 @@ class RecipesView extends Component {
     }
 
     updateWindowDimensions() {
-        this.setState({ n_wide: window.innerWidth / 300});
+        let cols = window.innerWidth / 300;
+        if(cols == 0)
+            cols = 1;
+        this.setState({ n_wide: cols});
     }
 
     render() {
+        if(!this.state.data) {
+            return (
+                <div>It looks empty here, lets
+                    <Link to={"/create/"}> add some recipes!</Link>
+                </div>
+            )
+        } else {
         // array of N elements, where N is the number of rows needed
         const rows = [...Array( Math.ceil(this.state.data.length / this.state.n_wide) )];
         // chunk the recipes into the array of rows
@@ -77,6 +87,7 @@ class RecipesView extends Component {
                 })}
             </div>
         )
+    }
     }
 }
 export default RecipesView;
