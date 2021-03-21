@@ -2,17 +2,17 @@
 ---
 environment:
   matrix:
-  - PYTHON: "C:\\Python36\\python.exe"
+  - PYTHON: "C:\\Python36"
 
 version: 1.0.{build}
 image: Visual Studio 2019
 install:
-- SET PATH=%PYTHON%;%path%
+- SET PATH=%PYTHON%;%PYTHON%\\Scripts;%path%
 - cmd: npm install
-- "%PYTHON% -m pip install django django-cors-headers djangorestframework djangorestframework-simplejwt djangorestframework pillow PyJWT==1.7.1"
+- "%PYTHON%\\python.exe -m pip install django django-cors-headers djangorestframework djangorestframework-simplejwt djangorestframework pillow PyJWT==1.7.1"
 
 build_script:
 - cmd: npm run build
 test_script:
 - cmd: npm run test
-- "%PYTHON% djangoApi/manage.py test"
+- "%PYTHON%\\python.exe djangoApi/manage.py test"
