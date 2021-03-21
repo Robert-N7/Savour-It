@@ -7,10 +7,10 @@ environment:
 version: 1.0.{build}
 image: Visual Studio 2019
 install:
-- cmd: >-
-  SET PATH=%PYTHON%;%path%
-  npm install
-  python -m pip install django django-cors-headers djangorestframework djangorestframework-simplejwt djangorestframework pillow PyJWT==1.7.1
+- SET PATH=%PYTHON%;%path%
+- cmd: npm install
+- cmd: python -m pip install django django-cors-headers djangorestframework djangorestframework-simplejwt djangorestframework pillow PyJWT==1.7.1
+
 build_script:
 - cmd: npm run build
 test_script:
