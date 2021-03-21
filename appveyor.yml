@@ -16,5 +16,4 @@ build_script:
 test_script:
 - cmd: >-
     npm run test
-
-    python3 djangoApi/manage.py test
+    python djangoApi/manage.py test
