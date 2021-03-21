@@ -15,4 +15,5 @@ build_script:
 - cmd: npm run build
 test_script:
 - cmd: npm run test
-- "%PYTHON%\\python.exe djangoApi/manage.py test"
+- "%PYTHON%\\python.exe djangoApi/manage.py test RecipeApp"
+- "%PYTHON%\\python.exe djangoApi/manage.py test authentication"
