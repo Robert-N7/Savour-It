@@ -1,0 +1,20 @@
+
+---
+environment:
+  matrix:
+  - PYTHON: "C:\Python36"
+
+version: 1.0.{build}
+image: Visual Studio 2019
+install:
+- cmd: >-
+  SET PATH=%PYTHON%;%path%
+  npm install
+  python -m pip install django django-cors-headers djangorestframework djangorestframework-simplejwt djangorestframework pillow PyJWT==1.7.1
+build_script:
+- cmd: npm run build
+test_script:
+- cmd: >-
+    npm run test
+
+    python3 djangoApi/manage.py test
