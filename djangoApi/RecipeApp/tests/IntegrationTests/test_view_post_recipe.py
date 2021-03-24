@@ -51,3 +51,24 @@ class TestViewPostRecipe(APITestCase):
     def test_bad_request(self):
         response = self.add_recipe(data={'Data': 'Bad'})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_put_success(self):
+        self.add_recipe()
+        data = {'Name': 'Toast',
+                'Description': 'A piece of toasted bread',
+                'Ingredients': 'Slice of Bread\nButter',
+                'Steps': '1.Toast the bread\n2.Butter\n3.Eat',
+                }
+        response = self.client.put('/api/recipes/create/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_put_not_found(self):
+        self.add_recipe()
+        data = {'Name': 'Toe',
+                'Description': 'A piece of toasted bread',
+                'Ingredients': 'Slice of Bread\nButter',
+                'Steps': '1.Toast the bread\n2.Butter\n3.Eat',
+                }
+        response = self.client.put('/api/recipes/create/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+

@@ -99,14 +99,15 @@ class PostRecipe(APIView):
         except ValueError as e:
             return Response(str(e), status.HTTP_400_BAD_REQUEST)
         try:
-            recipe = Recipe.objects.get(RecipeId=recipe_data['RecipeId'])
-            # only let them modify it if they created it!
-            if recipe.Creator != recipe_data['Creator']:
-                return Response(status=status.HTTP_403_FORBIDDEN)
+            recipe = Recipe.objects.get(Name=recipe_data.get('Name'))
         except Recipe.DoesNotExist:
             return Response(recipe_data, status=status.HTTP_404_NOT_FOUND)
+        # only let them modify it if they created it!
+        if recipe.Creator_id != recipe_data['Creator']:
+            return Response(status=status.HTTP_403_FORBIDDEN)
         recipe_serializer = RecipeSerializer(recipe, data=recipe_data)
         if recipe_serializer.is_valid():
+
             recipe_serializer.save()
             return Response('Successfully updated!', status=status.HTTP_200_OK)
         return Response(recipe_data, status=status.HTTP_400_BAD_REQUEST)
