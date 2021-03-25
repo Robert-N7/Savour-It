@@ -24,12 +24,20 @@ async function getRecipeApi(recipe) {
     }
 }
 
+async function editRecipeApi(data) {
+    try {
+        let response = await Api.put('/recipes/create/', data=data);
+        return response.data;
+    } catch(error) {
+        Promise.reject(error.response.status);
+    }
+}
+
 async function createRecipeApi(data) {
     try {
         let response = await Api.post('/recipes/create/', data = data);
         return response.data;
     } catch (error){
-        console.log('Status: ' + error.response.status);
         Promise.reject(error.response.status);
     }
 }
@@ -47,4 +55,4 @@ async function uploadPhotoApi(formData) {
     }
 }
 
-export {getRecipesApi, getRecipeApi, createRecipeApi, uploadPhotoApi};
+export {getRecipesApi, getRecipeApi, editRecipeApi, createRecipeApi, uploadPhotoApi};

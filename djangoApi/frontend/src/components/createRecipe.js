@@ -81,9 +81,7 @@ class CreateRecipe extends Component {
             formData.append('PhotoFile', this.state.photoFile, this.state.photoFile.name);
             uploadPhotoApi(formData)
             .then((response) => {
-                console.log(response);
                 data.PhotoFile = response;
-                console.log(data);
                 this.postJson(data);
             }).catch((error) => {
                 this.setState({errMessage: "Failed to upload file, are you sure it is the correct format?"});

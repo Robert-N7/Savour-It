@@ -1,7 +1,9 @@
 
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import Api from "../axiosApi";
 import {getRecipeApi} from "../recipeApi";
+import {getLastOfUrl} from "../lib/url";
 
 /**
  * Recipe class for Displaying recipes
@@ -12,22 +14,13 @@ class Recipe extends Component {
         this.state = {
             data: [],
             loaded: false,
-            placeholder: "Loading"
+            placeholder: "Loading..."
           };
-    }
-
-    getLastOfUrl() {
-        const thePath = window.location.pathname;
-        let urlPieces = thePath.split('/');
-        let lastItem = urlPieces.pop();
-        if(!lastItem)
-            lastItem = urlPieces.pop()
-        return lastItem;
     }
 
     loadData() {
         // Call the api and load recipe data
-        getRecipeApi(this.getLastOfUrl()).then(data => {
+        getRecipeApi(getLastOfUrl()).then(data => {
             this.setState({
                     data,
                     loaded: true
@@ -57,6 +50,11 @@ class Recipe extends Component {
                     <div className="recipe_name">
                         <h1>{recipe.Name}</h1>
                     </div>
+                    {Api.user == recipe.CreatorName && <Link className="recipe-link" to={"/edit/" + recipe.Name}>
+                        <div className="recipe-item-name">
+                            Edit
+                        </div>
+                    </Link>}
                     <div className="recipe_desc">
                         <this.newLineText text={recipe.Description} />
                     </div>
@@ -77,7 +75,7 @@ class Recipe extends Component {
             </div>
         )
         else 
-            return <div>Loading...</div>
+            return <div>{this.state.placeholder}</div>
     }
 }
 export default Recipe

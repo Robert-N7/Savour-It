@@ -10,6 +10,7 @@ import CreateRecipe from "./createRecipe";
 import Logout from './logout';
 import Api from '../axiosApi';
 import LoginRedirect from "./login-redirect";
+import EditRecipe from "./editRecipe";
 
 
 
@@ -67,7 +68,10 @@ class App extends Component {
                         <Route exact path={"/logout/"} component={Logout}></Route>
                         <Route exact path={"/signup/"} component={Signup}/>
                         <Route exact path={"/recipes/"} component={Recipes}/>
-                        <PrivateRoute exact isLoggedIn={this.state.isLoggedIn} path={"/create/"} component={CreateRecipe}/>
+                        <PrivateRoute exact canFollow={this.state.isLoggedIn} redirectTo="/login-redirect"
+                            path={"/create/"} component={CreateRecipe}/>
+                        <PrivateRoute canFollow={this.state.isLoggedIn} redirectTo="/login-redirect"
+                            path={"/edit/"} component={EditRecipe}/>
                         <Route path={"/recipes/"} component={Recipe}/>
                         <Route path={"/"} component={Recipes}/>
                    </Switch>
@@ -77,11 +81,11 @@ class App extends Component {
     }
 }
 
-const PrivateRoute = ({ isLoggedIn, ...props }) =>
-  isLoggedIn
+const PrivateRoute = ({ canFollow: canFollow, redirectTo: redirectTo, ...props }) =>
+  canFollow
     ? <Route { ...props } />
     : <Redirect to={{
-        pathname: "/login-redirect", 
+        pathname: redirectTo, 
         state: { from: useLocation().pathname } }} />
 
 

@@ -1,6 +1,7 @@
 from django.db import IntegrityError
 from django.shortcuts import render
 from rest_framework import permissions, status
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from rest_framework.views import APIView
@@ -9,7 +10,7 @@ from authentication.models import CustomUser
 from authentication.serializers import CustomUserSerializer
 
 
-class CustomUserCreate(APIView):
+class CustomUserView(APIView):
     """View to create users"""
     permission_classes = (permissions.AllowAny,)
 

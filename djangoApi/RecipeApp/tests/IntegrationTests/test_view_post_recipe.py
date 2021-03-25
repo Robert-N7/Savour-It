@@ -61,6 +61,12 @@ class TestViewPostRecipe(APITestCase):
                 }
         response = self.client.put('/api/recipes/create/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        # Ensure it is in database
+        try:
+            recipe = Recipe.objects.get(Name=data['Name'])
+            self.assertEqual(data['Description'], recipe.Description)
+        except Recipe.DoesNotExist:
+            raise ValueError('test_add: Failed to find added recipe in database')
 
     def test_put_not_found(self):
         self.add_recipe()

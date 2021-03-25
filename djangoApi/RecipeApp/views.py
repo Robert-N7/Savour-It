@@ -107,7 +107,6 @@ class PostRecipe(APIView):
             return Response(status=status.HTTP_403_FORBIDDEN)
         recipe_serializer = RecipeSerializer(recipe, data=recipe_data)
         if recipe_serializer.is_valid():
-
             recipe_serializer.save()
             return Response('Successfully updated!', status=status.HTTP_200_OK)
         return Response(recipe_data, status=status.HTTP_400_BAD_REQUEST)

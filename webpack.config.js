@@ -3,6 +3,9 @@ const path = require('path');
 module.exports = {
     mode: "development",
     entry: ('babel-polyfill', path.resolve(__dirname, 'djangoApi/frontend/src/index.js')),
+    watchOptions: {
+        ignored: ['./node_modules/',]
+    },
     output: {
         // options related to how webpack emits results
 

@@ -28,6 +28,7 @@ async function createUser(credentials) {
 async function login(credentials, onFulfilled=null, onRejected=null) {
     try {
         let response = await this.post('/token/obtain/', credentials);
+        this.user = credentials.username;
         this.onLogin(response);
         if(onFulfilled)
             onFulfilled(response);
@@ -43,7 +44,7 @@ async function login(credentials, onFulfilled=null, onRejected=null) {
  * Logs the user out
  */
 function logout(callback=null) {
-    onLogout()
+    this.onLogout()
     if(callback)
         callback()
 }
@@ -131,6 +132,7 @@ function initAxiosInstance(debug=false) {
             'Authorization': auth,
             'Content-Type': 'application/json'
         },
+        user: null,
         isAuthenticated: false,
         skipIntercept: false,
         createUser: null,
@@ -153,7 +155,7 @@ function initAxiosInstance(debug=false) {
     // }
     instance.login = login.bind(instance);
     instance.onLogin = onLogin.bind(instance);
-    instance.logout = onLogout.bind(instance);
+    instance.logout = logout.bind(instance);
     instance.onLogout = onLogout.bind(instance);
     instance.createUser = createUser.bind(instance);
 
